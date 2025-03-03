@@ -1,0 +1,202 @@
+:root {
+    --opacity: 0.5;
+    --primary-bg: #f8fafc;
+    --secondary-bg: #e2e8f0;
+    --accent-color: #ff6600;
+    --button-bg: #9333ea;
+    --button-hover-bg: #7e22ce;
+    --text-color: #1f2937;
+    --nav-bg: #ffedd5;
+    --nav-hover-bg: #fdba74;
+    --border-color: #64748b;
+    --highlight-color: #facc15;
+}
+
+/* Main container */
+.mainDiv {
+    margin: 20px;
+    padding: 25px;
+    background: var(--primary-bg);
+    border-radius: 12px;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    background: var(--secondary-bg);
+    border-radius: 8px;
+    width: 100%;
+    justify-content: center;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Navigation Item */
+.navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: var(--nav-bg);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.navItem:hover {
+    background: var(--nav-hover-bg);
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.navItem.selected-tab {
+    background: linear-gradient(135deg, #3dfd08 0%, #233204 100%);
+    color: white;
+    transform: scale(1.08);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Buttons */
+.button button {
+    margin-left: 10px;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--button-bg);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.button button:hover {
+    background-color: var(--button-hover-bg);
+    transform: scale(1.05);
+}
+
+/* Timer List */
+.timersList {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Timer Box */
+.timersBox {
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--secondary-bg);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-color);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.timersBox:hover {
+    transform: scale(1.05);
+    background: #dbeafe;
+}
+
+/* Grouped Header */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    padding: 12px;
+    background: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    text-align: center;
+}
+
+/* Arrow Image */
+.arrow_img {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.arrow_img:hover {
+    transform: scale(1.1);
+}
+
+/* Add Timer Form */
+.addTimerForm {
+    order: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 8px;
+    background: var(--secondary-bg);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Styled Span */
+span {
+    border-radius: 6px;
+    background-color: var(--highlight-color);
+    color: black;
+    padding: 6px 10px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mainDiv {
+        padding: 15px;
+    }
+
+    .main {
+        flex-direction: column;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .grouped, .addTimerForm {
+        flex: 1;
+        width: 100%;
+    }
+
+    .timersList {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .timersBox {
+        width: 100%;
+        max-width: 250px;
+    }
+}

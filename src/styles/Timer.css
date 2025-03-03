@@ -1,0 +1,73 @@
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.numbers {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #ffffff;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 12px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+}
+
+h3 {
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.timer-card {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #ecf0f1;
+    border-radius: 10px;
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    background: radial-gradient(circle, rgba(223, 64, 169, 1) 0%, rgba(150, 58, 166, 100) 35%, rgba(77, 53, 163, 59) 69%);
+    padding: 15px;
+    width: 220px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.timer-card:hover {
+    transform: scale(1.05);
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+button {
+    background-color: #f39c12;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #e67e22;
+    transform: scale(1.1);
+}
+
+button:active {
+    transform: scale(0.95);
+}

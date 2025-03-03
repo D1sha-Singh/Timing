@@ -1,0 +1,76 @@
+:root {
+    --primary-bg: #f8fafc;
+    --border-color: #e11d48; /* Modern red tone */
+    --text-color: #1e293b;
+    --highlight-color: #facc15;
+}
+
+/* Main Layout */
+.main {
+    display: flex;
+    gap: 20px; /* Adds spacing between elements */
+    padding: 20px;
+    background: var(--primary-bg);
+    align-items: flex-start;
+}
+
+/* Grouped Section */
+.grouped {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    flex: 2;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    padding: 10px;
+    background: white;
+    color: var(--text-color);
+    font-weight: bold;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Arrow Image */
+.arrow_img {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.arrow_img:hover {
+    transform: scale(1.1);
+}
+
+/* Add Timer Form */
+.addTimerForm {
+    order: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 8px;
+    background: #e2e8f0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .grouped, .addTimerForm {
+        flex: 1;
+        width: 100%;
+    }
+}

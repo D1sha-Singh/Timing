@@ -1,0 +1,37 @@
+.formMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-width: 2px;
+    border-style: solid;
+    /* margin: 5px; */
+    padding: 15px;
+}
+
+.formFields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form {
+    border-width: 2px;
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    padding: 10px;
+    align-items: center;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 5px;
+}
+
+input {
+    margin-left: 10px;
+}
