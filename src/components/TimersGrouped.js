@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+// import { useDispatch } from 'react-redux'
 import AddTimerForm from './AddTimerForm'
 import "../../src/styles/TimersGrouped.css"
 import TabContent from './TabContent'
@@ -7,12 +7,12 @@ import TabContent from './TabContent'
 
 const TimersGrouped = () => {
     const [openForm, setOpenForm] = useState(false)
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
 
-    const remove = (category) => {
-        // dispatch(removeCategory({ category: category }))
-    }
+    // const remove = (category) => {
+    //     // dispatch(removeCategory({ category: category }))
+    // }
 
     return (
         <div className='main'>

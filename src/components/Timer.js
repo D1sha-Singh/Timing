@@ -14,7 +14,7 @@ const Timer = ({
     const [shouldPause, setShouldPause] = useState(false);
     const [shouldReset, setShouldReset] = useState(false);
     const [run, setRun] = useState(shouldStart);
-    const [completed, setCompleted] = useState(false);
+    // const [completed, setCompleted] = useState(false);
 
     const hours = Math.floor(time / 3600);
     let remSec = time % 3600; 
@@ -29,7 +29,7 @@ const Timer = ({
         return () => {
             clearInterval(id) 
         }
-    }, [time, run, shouldStart])
+    }, [time, run, shouldStart, shouldPause, shouldReset])
 
     const start = () => {
         setRun(true);
@@ -61,7 +61,7 @@ const Timer = ({
                 <button onClick={pause}>Pause</button>
                 <button onClick={reset}>Reset</button>
             </div>
-            {completed && (<h3>Completed</h3>)}
+            {/* {completed && (<h3>Completed</h3>)} */}
         </div>
     )
 }
