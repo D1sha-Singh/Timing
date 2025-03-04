@@ -31,7 +31,7 @@ const TabContent = () => {
                 </div>
             )
         })
-    }, [selected, shouldStart, catChild])
+    }, [selected, shouldStart, catChild, timers])
 
     if (categories.length === 0) return <NoTimersView />
 

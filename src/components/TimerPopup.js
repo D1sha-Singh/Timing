@@ -9,8 +9,7 @@ const TimerPopup = ({ isOpen, onClose, onReset, timerName, timerCategory }) => {
             <div className="popup-content">
                 <h2>⏳ {timerName} of {timerCategory} Completed!</h2>
                 <p>Time’s up! Great job on completing your session.</p>
-                <div className="confetti"></div> For animation
-
+                <div className="confetti"></div>
                 <div className="popup-buttons">
                     {/* <button className="reset-btn" onClick={onReset}>🔄 Reset Timer</button> */}
                     <button className="close-btn" onClick={onClose}>❌ Close</button>

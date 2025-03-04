@@ -10,9 +10,8 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
     const [isRunning, setIsRunning] = useState(false);
     const [wasManuallyPaused, setWasManuallyPaused] = useState(false);
     const [isOpen, setIsOpen] = useState(time === 0);
-    const intervalRef = useRef(null); // Stores the timer interval
-
-    // ⏳ Function to start the countdown
+    const intervalRef = useRef(null);
+    
     const startTimer = () => {
         if (!intervalRef.current) {
             intervalRef.current = setInterval(() => {
@@ -21,7 +20,7 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
         }
     };
 
-    // ⏹ Function to clear the interval
+
     const stopTimer = () => {
         if (intervalRef.current) {
             clearInterval(intervalRef.current);
@@ -29,7 +28,6 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
         }
     };
 
-    // ✅ Handle tab visibility change
     useEffect(() => {
         const handleVisibilityChange = () => {
             if (document.hidden) {
@@ -43,7 +41,6 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
         return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
     }, [isRunning]);
 
-    // 🔄 Start when "Start All" is clicked, but only if not manually paused
     useEffect(() => {
         const isActive = catChild === category;
         if (shouldStart && isActive && !wasManuallyPaused) {
@@ -51,7 +48,6 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
         }
     }, [shouldStart, catChild, category, wasManuallyPaused]);
 
-    // 🎯 Manage the timer lifecycle
     useEffect(() => {
         if (isRunning) {
             startTimer();
@@ -59,17 +55,17 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
             stopTimer();
         }
 
-        return () => stopTimer(); // Cleanup when unmounting
+        return () => stopTimer(); 
     }, [isRunning]);
 
-    // ⏪ Reset timer when duration changes
+
     useEffect(() => {
         setTime(duration);
         stopTimer();
         setIsRunning(false);
     }, [duration]);
 
-    // 🔘 Control functions
+
     const start = () => {
         setIsRunning(true);
         setWasManuallyPaused(false);
