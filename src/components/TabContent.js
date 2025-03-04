@@ -5,11 +5,11 @@ import "../../src/styles/TabContent.css"
 import NoTimersView from './NoTimersView'
 
 const TabContent = () => {
-    const timers = useSelector((store) => store?.timer?.timers)
+    const timers = useSelector((store) => store?.timer?.timers || [])
     const categories = useSelector((store) => store?.category?.categories || [])
     const [shouldStart, setShouldStart] = useState(false);
     const [catChild, setCatChild] = useState('');
-    const [selected, setSelected] = useState(categories?.[0]?.category)
+    const [selected, setSelected] = useState(categories?.[0]?.category || '')
 
     const setSelectedCat = (cat) => {
         setSelected(cat)

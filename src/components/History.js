@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import '../styles/History.css'
 
 const History = () => {
-    const timers = useSelector((store) => store?.timer?.completedTimers)
+    const timers = useSelector((store) => store?.timer?.completedTimers || [])
 
     return (
         <div>

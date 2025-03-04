@@ -4,13 +4,13 @@ import "../../src/styles/Timer.css";
 import TimerPopup from "./TimerPopup";
 import { addCompletedTimer } from '../app/timersSlice';
 
-const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }) => {
+const Timer = ({ duration = 0, category = "", name = "", shouldStart = false, catChild = "" }) => {
     const dispatch = useDispatch();
 
     const [time, setTime] = useState(duration);
     const [isRunning, setIsRunning] = useState(false);
     const [wasManuallyPaused, setWasManuallyPaused] = useState(false);
-    const [isOpen, setIsOpen] = useState(time === 0);
+    const [isOpen, setIsOpen] = useState(time === 0 || false);
     const intervalRef = useRef(null);
 
     const startTimer = () => {

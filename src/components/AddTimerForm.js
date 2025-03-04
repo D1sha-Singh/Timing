@@ -5,7 +5,7 @@ import { addCategory } from '../app/categoriesSlice';
 import "../../src/styles/AddTimerForm.css"
 
 const AddTimerForm = ({ openForm, setOpenForm }) => {
-    const categories = useSelector((store) => store?.category?.categories)
+    const categories = useSelector((store) => store?.category?.categories || [])
     const dispatch = useDispatch();
 
     const categoriesList = categories?.map(item => item.category) || [];

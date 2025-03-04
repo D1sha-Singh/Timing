@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 // import { removeCategory } from '../app/categoriesSlice'
 
 const TimersGrouped = () => {
-    const completedTimers = useSelector((store) => store?.timer?.completedTimers)
+    const completedTimers = useSelector((store) => store?.timer?.completedTimers || [])
     const [openForm, setOpenForm] = useState(false)
     const navigate = useNavigate();
     // const dispatch = useDispatch();

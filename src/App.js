@@ -18,7 +18,8 @@ const router = createBrowserRouter([
   },
   {
     path: 'history',
-    element: <History />
+    element: <History />,
+    errorElement: <ErrorPage />
   }
 ]);
 
