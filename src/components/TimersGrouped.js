@@ -3,10 +3,12 @@ import React, { useState } from 'react'
 import AddTimerForm from './AddTimerForm'
 import "../../src/styles/TimersGrouped.css"
 import TabContent from './TabContent'
+import { useNavigate } from 'react-router-dom'
 // import { removeCategory } from '../app/categoriesSlice'
 
 const TimersGrouped = () => {
     const [openForm, setOpenForm] = useState(false)
+    const navigate = useNavigate();
     // const dispatch = useDispatch();
 
 
@@ -18,16 +20,19 @@ const TimersGrouped = () => {
         <div className='main'>
             <div className='grouped'>
                 <div className='header'>
-                    <h1>TimersGrouped</h1>
-                    <button onClick={() => setOpenForm(!openForm)}>Add Timer</button>
+                    <div>
+                        <h1>TimersGrouped</h1>
+                        <button onClick={() => setOpenForm(!openForm)}>Add Timer</button>
+                    </div>
+                    <button onClick={() => navigate('/history')}>View Completed Timers</button>
                 </div>
                 <TabContent />
             </div>
             {openForm && (
-            <div className='addTimerForm'>
-                <AddTimerForm openForm={openForm} setOpenForm={setOpenForm} />
-            </div>
-        )}
+                <div className='addTimerForm'>
+                    <AddTimerForm openForm={openForm} setOpenForm={setOpenForm} />
+                </div>
+            )}
         </div>
 
     )

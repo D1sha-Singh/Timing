@@ -22,7 +22,6 @@ const TabContent = () => {
     }
 
     const renderTimers = useCallback(() => {
-        console.log('inside timer tab selected start cat ', selected, shouldStart, catChild)
         const filteredtimers = timers?.filter(item => item?.category === selected)
         return filteredtimers?.map((item, index) => {
             return (

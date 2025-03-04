@@ -1,17 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import "../../src/styles/Timer.css";
 import TimerPopup from "./TimerPopup";
+import { addCompletedTimer } from '../app/timersSlice';
 
 const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }) => {
-    
-    console.log('duration:', duration, 'category:', category, 'catChild:', catChild, 'shouldStart:', shouldStart);
+    const dispatch = useDispatch();
 
     const [time, setTime] = useState(duration);
     const [isRunning, setIsRunning] = useState(false);
     const [wasManuallyPaused, setWasManuallyPaused] = useState(false);
     const [isOpen, setIsOpen] = useState(time === 0);
     const intervalRef = useRef(null);
-    
+
     const startTimer = () => {
         if (!intervalRef.current) {
             intervalRef.current = setInterval(() => {
@@ -55,7 +56,7 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
             stopTimer();
         }
 
-        return () => stopTimer(); 
+        return () => stopTimer();
     }, [isRunning]);
 
 
@@ -83,16 +84,24 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
     };
 
     useEffect(() => {
-        setIsOpen(time === 0)
-    }, [time])
+        if (time === 0) {
+            setIsOpen(true);
+            dispatch(addCompletedTimer({
+                name,
+                category,
+                duration
+            }));
+        }
+    }, [time]);
+    
 
     const onClose = () => {
         setIsOpen(false);
     }
 
-    if(isOpen)
+    if (isOpen)
         return <TimerPopup isOpen={isOpen} timerName={name} timerCategory={category} onClose={onClose} />
-    
+
     return (
         <div className="timer-card">
             <h3>{name}</h3>
