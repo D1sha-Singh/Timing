@@ -92,7 +92,7 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
                 duration
             }));
         }
-    }, [time]);
+    }, [time, dispatch, name, category, duration]);
     
 
     const onClose = () => {
