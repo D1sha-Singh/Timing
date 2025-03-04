@@ -1,0 +1,47 @@
+.empty-timer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.fun-animation {
+    width: 100px;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.innerContainer {
+    font-weight: bold;
+    border-style: groove;
+    border-width: 4px;
+    padding: 10px;
+    border-color: blueviolet;
+    border-width: 2px;
+    border-style: solid;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+h2 {
+    color:chartreuse;
+    animation: blink 1.5s infinite;
+    background-color: darkmagenta;
+}

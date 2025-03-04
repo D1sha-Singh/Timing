@@ -2,10 +2,11 @@ import React, { useCallback, useState } from 'react'
 import Timer from './Timer'
 import { useSelector } from 'react-redux'
 import "../../src/styles/TabContent.css"
+import NoTimersView from './NoTimersView'
 
 const TabContent = () => {
     const timers = useSelector((store) => store?.timer?.timers)
-    const categories = useSelector((store) => store?.category?.categories)
+    const categories = useSelector((store) => store?.category?.categories || [])
     const [shouldStart, setShouldStart] = useState(false);
     const [catChild, setCatChild] = useState('');
     const [selected, setSelected] = useState(categories?.[0]?.category)
@@ -26,11 +27,13 @@ const TabContent = () => {
         return filteredtimers?.map((item, index) => {
             return (
                 <div className='timersList' key={index.toString()}>
-                    <Timer duration={item.duration} category={item.category} name={item.name} shouldStart={shouldStart} catChild={catChild}/>
+                    <Timer duration={item.duration} category={item.category} name={item.name} shouldStart={shouldStart} catChild={catChild} />
                 </div>
             )
         })
     }, [selected, shouldStart, catChild])
+
+    if (categories.length === 0) return <NoTimersView />
 
     return (
         <div className='mainDiv'>

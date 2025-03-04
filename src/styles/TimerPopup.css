@@ -1,0 +1,67 @@
+/* Overlay to blur background */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Popup styling */
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    animation: popUp 0.3s ease-in-out;
+}
+
+/* Animation for popup */
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Buttons */
+.popup-buttons {
+    margin-top: 20px;
+}
+
+.reset-btn, .close-btn {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reset-btn {
+    background: #28a745;
+    color: white;
+}
+
+.close-btn {
+    background: #dc3545;
+    color: white;
+}
+
+/* Confetti Effect */
+.confetti {
+    width: 50px;
+    height: 50px;
+    background: url('https://cdn.pixabay.com/animation/2024/05/02/07/43/07-43-00-535_512.gif'); /* Add a small confetti GIF */
+    background-size: cover;
+    margin: 10px auto;
+}

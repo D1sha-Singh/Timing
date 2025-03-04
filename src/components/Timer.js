@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../../src/styles/Timer.css";
+import TimerPopup from "./TimerPopup";
 
 const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }) => {
+    
     console.log('duration:', duration, 'category:', category, 'catChild:', catChild, 'shouldStart:', shouldStart);
 
     const [time, setTime] = useState(duration);
     const [isRunning, setIsRunning] = useState(false);
     const [wasManuallyPaused, setWasManuallyPaused] = useState(false);
-
+    const [isOpen, setIsOpen] = useState(time === 0);
     const intervalRef = useRef(null); // Stores the timer interval
 
     // ⏳ Function to start the countdown
@@ -84,6 +86,17 @@ const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }
         setWasManuallyPaused(false);
     };
 
+    useEffect(() => {
+        setIsOpen(time === 0)
+    }, [time])
+
+    const onClose = () => {
+        setIsOpen(false);
+    }
+
+    if(isOpen)
+        return <TimerPopup isOpen={isOpen} timerName={name} timerCategory={category} onClose={onClose} />
+    
     return (
         <div className="timer-card">
             <h3>{name}</h3>
