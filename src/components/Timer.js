@@ -1,69 +1,106 @@
-import React, { useEffect, useState } from 'react';
-import "../../src/styles/Timer.css"
+import React, { useEffect, useState, useRef } from "react";
+import "../../src/styles/Timer.css";
 
-const Timer = ({
-    duration = 0,
-    category = "",
-    name = "",
-    shouldStart,
-    catChild
-}) => {
-    shouldStart = shouldStart && catChild === category;
-    // console.log('catchild, category, final ', catChild, category, shouldStart)
-    const [time, setTime] = useState(duration)
-    const [shouldPause, setShouldPause] = useState(false);
-    const [shouldReset, setShouldReset] = useState(false);
-    const [run, setRun] = useState(shouldStart);
-    // const [completed, setCompleted] = useState(false);
+const Timer = ({ duration = 0, category = "", name = "", shouldStart, catChild }) => {
+    console.log('duration:', duration, 'category:', category, 'catChild:', catChild, 'shouldStart:', shouldStart);
 
-    const hours = Math.floor(time / 3600);
-    let remSec = time % 3600; 
-    const minutes = Math.floor(remSec / 60);
-    const seconds = remSec % 60;
+    const [time, setTime] = useState(duration);
+    const [isRunning, setIsRunning] = useState(false);
+    const [wasManuallyPaused, setWasManuallyPaused] = useState(false);
 
-    useEffect(() => {
-        const id = ((shouldStart || run) && !shouldPause && !shouldReset) && setInterval(() => {
-            setTime(time > 1 ? time - 1 : 0)
-        }, 1000)
-        
-        return () => {
-            clearInterval(id) 
+    const intervalRef = useRef(null); // Stores the timer interval
+
+    // ⏳ Function to start the countdown
+    const startTimer = () => {
+        if (!intervalRef.current) {
+            intervalRef.current = setInterval(() => {
+                setTime(prevTime => (prevTime > 0 ? prevTime - 1 : 0));
+            }, 1000);
         }
-    }, [time, run, shouldStart, shouldPause, shouldReset])
+    };
 
+    // ⏹ Function to clear the interval
+    const stopTimer = () => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
+    };
+
+    // ✅ Handle tab visibility change
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                stopTimer(); // Pause when switching tabs
+            } else if (isRunning) {
+                startTimer(); // Resume only if running
+            }
+        };
+
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+        return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+    }, [isRunning]);
+
+    // 🔄 Start when "Start All" is clicked, but only if not manually paused
+    useEffect(() => {
+        const isActive = catChild === category;
+        if (shouldStart && isActive && !wasManuallyPaused) {
+            setIsRunning(true);
+        }
+    }, [shouldStart, catChild, category, wasManuallyPaused]);
+
+    // 🎯 Manage the timer lifecycle
+    useEffect(() => {
+        if (isRunning) {
+            startTimer();
+        } else {
+            stopTimer();
+        }
+
+        return () => stopTimer(); // Cleanup when unmounting
+    }, [isRunning]);
+
+    // ⏪ Reset timer when duration changes
+    useEffect(() => {
+        setTime(duration);
+        stopTimer();
+        setIsRunning(false);
+    }, [duration]);
+
+    // 🔘 Control functions
     const start = () => {
-        setRun(true);
-        setShouldReset(false);
-        setShouldPause(false);
-    }
+        setIsRunning(true);
+        setWasManuallyPaused(false);
+    };
 
     const pause = () => {
-        setRun(false);
-        setShouldPause(true);
-        setShouldReset(false);
-    }
+        setIsRunning(false);
+        setWasManuallyPaused(true);
+    };
 
     const reset = () => {
-        setRun(false);
-        setShouldPause(false);
-        setShouldReset(true);
+        setIsRunning(false);
         setTime(duration);
-    }
+        setWasManuallyPaused(false);
+    };
 
     return (
-        <div className='timer-card'>
+        <div className="timer-card">
             <h3>{name}</h3>
-            <div className='timer'>
-                <h3 className='numbers'>{hours} : {minutes} : {seconds}</h3>
+            <div className="timer">
+                <h3 className="numbers">
+                    {String(Math.floor(time / 3600)).padStart(2, "0")}:
+                    {String(Math.floor((time % 3600) / 60)).padStart(2, "0")}:
+                    {String(time % 60).padStart(2, "0")}
+                </h3>
             </div>
-            <div className='buttons'>
-                <button onClick={start}>Start</button>
-                <button onClick={pause}>Pause</button>
+            <div className="buttons">
+                <button onClick={start} disabled={isRunning}>Start</button>
+                <button onClick={pause} disabled={!isRunning}>Pause</button>
                 <button onClick={reset}>Reset</button>
             </div>
-            {/* {completed && (<h3>Completed</h3>)} */}
         </div>
-    )
-}
+    );
+};
 
-export default Timer
+export default Timer;

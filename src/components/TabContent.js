@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Timer from './Timer'
 import { useSelector } from 'react-redux'
 import "../../src/styles/TabContent.css"
@@ -10,32 +10,37 @@ const TabContent = () => {
     const [catChild, setCatChild] = useState('');
     const [selected, setSelected] = useState(categories?.[0]?.category)
 
+    const setSelectedCat = (cat) => {
+        setSelected(cat)
+        setShouldStart(false)
+    }
+
     const setAllTimers = (category) => {
         setCatChild(category)
         setShouldStart(true)
     }
 
-    const renderTimers = () => {
-        const filteredtimers = timers?.filter((item, index) => item?.category === selected)
-        console.log(filteredtimers)
+    const renderTimers = useCallback(() => {
+        console.log('inside timer tab selected start cat ', selected, shouldStart, catChild)
+        const filteredtimers = timers?.filter(item => item?.category === selected)
         return filteredtimers?.map((item, index) => {
-            console.log(item)
             return (
-                <div className='timersList'>
-                    <Timer duration={item.duration} category={item.category} name={item.name} shouldStart={shouldStart} catChild={catChild} />
+                <div className='timersList' key={index.toString()}>
+                    <Timer duration={item.duration} category={item.category} name={item.name} shouldStart={shouldStart} catChild={catChild}/>
                 </div>
             )
         })
-    }
+    }, [selected, shouldStart, catChild])
 
     return (
         <div className='mainDiv'>
             <div className='navbar'>
                 {categories?.map((category, index) => (
-                    <div className={`navItem ${selected === category?.category ? 'selected-tab' : ''}`}>
-                        <span onClick={() => setSelected(category?.category)}>{category?.category}</span>
+                    <div className={`navItem ${selected === category?.category ? 'selected-tab' : ''}`} key={index.toString()}>
+                        <span onClick={() => setSelectedCat(category?.category)}>{category?.category}</span>
                         <div className='button'>
-                            <button onClick={() => setAllTimers(category?.category)}>start all</button>
+                            <button onClick={() => setAllTimers(category?.category)} disabled={selected !== category?.category}>Start All</button>
+                            {/* <button onClick={() => setAllTimers(category?.category, false)}>Pause All</button> */}
                         </div>
                     </div>
                 ))}
