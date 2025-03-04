@@ -74,3 +74,22 @@
         width: 100%;
     }
 }
+
+.completed:hover {
+    /* background-color: #e67e22; */
+    transform: scale(1.1);
+}
+
+.tooltip {
+    display: flex;
+    flex-direction: column;
+    box-shadow: #e11d48;
+    border-style: dashed;
+    border-color: grey;
+    border-width: 1px;
+    border-radius: 8px;
+}
+
+.completed {
+    font-size: 12px;
+}
